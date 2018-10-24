@@ -438,7 +438,7 @@ The following screenshot shows Harvester Core is running on IPython. An acquired
      (id_='TLSimuMono', vendor='EMVA_D', model='TLSimuMono', tl_type='Custom', user_defined_name='Center', serial_number='SN_InterfaceB_0', version='1.2.3'),
      (id_='TLSimuColor', vendor='EMVA_D', model='TLSimuColor', tl_type='Custom', user_defined_name='Center', serial_number='SN_InterfaceB_1', version='1.2.3')]
 
-    In [7]: ia = h.create_image_acquirer(serial_number='SN_InterfaceA_0')
+    In [7]: ia = h.create_image_acquirer(serial_number='SN_InterfaceA_0', sleep_duration_s=0.000001)
 
     In [8]: ia.device.node_map.Width.value, ia.device.node_map.Height.value = 8, 8
 
@@ -570,13 +570,15 @@ Or equivalently:
 
 .. code-block:: python
 
-    ia = h.create_image_acquirer(list_index=0)
+    ia = h.create_image_acquirer(list_index=0, sleep_duration_s=0.000001)
 
 You can connect the same device passing more unique information to the method such as:
 
 .. code-block:: python
 
-    mono_a = h.create_image_acquirer(serial_number='SN_InterfaceA_0')
+    mono_a = h.create_image_acquirer(serial_number='SN_InterfaceA_0', sleep_duration_s=0.000001)
+
+Note: sleep_duration_s option was added for Jai STEMMER IMAGING cameras as they experianced data throughput drop. 
 
 We named the acquirer object ``ia`` in the above example but in a practical occasion, you may name it like just ``camera``, ``mono_cam``, or ``face_detection_cam`` more specifically even though those entities don't acquire images by themselves but they transfer images that will be acquired by their image acquirer.
 
